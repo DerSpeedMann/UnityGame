@@ -7,24 +7,20 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public Canvas MainHud;
-    public string StartButtonText = "Start";
-    public string RestartButtonText = "Restart";
-
-    private bool gameStarted = false;
-    private Text spawnButtonText;
+    public GameObject editorHud;
+    public GameObject gameHud;
 
     void Start()
     {
-        spawnButtonText = GameObject.Find("Start").GetComponentInChildren<Text>();
-        spawnButtonText.text = StartButtonText;
+        editorHud.SetActive(true);
+        gameHud.SetActive(false);
     }
-    public void StartPressed()
+    public void HideGameUI(bool hide)
     {
-        if (!gameStarted)
-        {
-            gameStarted = true;
-            spawnButtonText.text = RestartButtonText;
-        }
+        gameHud.SetActive(!hide);
+    }
+    public void HideEditorUI(bool hide)
+    {
+        editorHud.SetActive(!hide);
     }
 }
