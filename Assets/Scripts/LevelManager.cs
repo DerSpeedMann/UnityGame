@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
     public GameObject playerPrefab;
     public GameObject startPoint;
@@ -23,38 +23,6 @@ public class GameManager : MonoBehaviour
         camManager = mainCamera.GetComponent<CameraManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (editorMode)
-        {
-            if (Input.GetMouseButton(0))
-            {
-
-                drawManager.StartDrawing();
-            }
-            if (Input.GetMouseButtonUp(0))
-            {
-                drawManager.StopDrawing();
-            }
-        }
-    }
-    private void LateUpdate()
-    {
-        if (editorMode)
-        {
-            if (Input.GetMouseButtonDown(1) || Input.touchCount == 2)
-            {
-                camManager.StartDrag(Input.mousePosition);
-            }
-            if (Input.GetMouseButton(1) || Input.touchCount == 2)
-            {
-                camManager.Drag(Input.mousePosition);
-            }
-
-            camManager.Zoom(Input.GetAxis("Mouse ScrollWheel"));            
-        }
-    }
     public void StartGame()
     {
         editorMode = false;
@@ -101,7 +69,7 @@ public class GameManager : MonoBehaviour
             player = Instantiate(playerPrefab, startPoint.transform.position, Quaternion.identity);
 
             var playerManager = player.GetComponent<PlayerManager>();
-            playerManager.SetGameManager(this);
+            playerManager.SetLevelManager(this);
             playerManager.spawnPoint = startPoint.transform.position;
 
             camManager.SetPlayer(player);

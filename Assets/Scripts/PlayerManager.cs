@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public GameManager gameManager;
+    public LevelManager levelManager;
     public Vector3 spawnPoint;
 
     private int checkpoints = 0;
@@ -49,12 +49,10 @@ public class PlayerManager : MonoBehaviour
         checkpoints++;
         spawnPoint = checkpoint.transform.position;
         checkpoint.SetActive(false);
-        Debug.Log(checkpoints);
-
     }
     private bool WinCheck()
     {
-        if(checkpoints >= gameManager.checkpoints.Length)
+        if(checkpoints >= levelManager.checkpoints.Length)
         {
             Debug.Log("Win");
             return true;
@@ -62,9 +60,9 @@ public class PlayerManager : MonoBehaviour
         return false;
     }
 
-    public void SetGameManager(GameManager manager)
+    public void SetLevelManager(LevelManager manager)
     {
-        gameManager = manager;
+        levelManager = manager;
     }
 
 }

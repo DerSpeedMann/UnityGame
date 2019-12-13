@@ -40,14 +40,14 @@ public class DrawManager : MonoBehaviour
             lineCount = 0;
         }
     }
-    public void StartDrawing()
+    public void Draw(Vector3 startPoint)
     {
         if (activeLine == null)
         {
             CreateNewLine();
         }
 
-        AddPoint(activeLine, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        AddPoint(activeLine, Camera.main.ScreenToWorldPoint(startPoint));
     }
     public void StopDrawing()
     {
