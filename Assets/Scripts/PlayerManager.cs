@@ -9,7 +9,12 @@ public class PlayerManager : MonoBehaviour
 
     private int checkpoints = 0;
     private bool alive = true;
+    private Rigidbody2D rigidBody;
 
+    private void Start()
+    {
+        rigidBody = GetComponent<Rigidbody2D>();
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (alive)
@@ -21,6 +26,10 @@ public class PlayerManager : MonoBehaviour
             else if (other.CompareTag("Checkpoint"))
             {
                 SetCkeckpoint(other.gameObject);
+            }
+            else if (other.CompareTag("NoDraw"))
+            {
+
             }
             else
             {
@@ -38,21 +47,30 @@ public class PlayerManager : MonoBehaviour
     public void Respawn()
     {
         alive = true;
-        var body = GetComponent<Rigidbody2D>();
-        body.velocity = Vector2.zero;
-        body.angularVelocity = 0;
-
+        StopSleth();
         transform.SetPositionAndRotation(spawnPoint, Quaternion.identity);
+    }
+    public void StopSleth()
+    {
+        rigidBody.velocity = Vector2.zero;
+        rigidBody.angularVelocity = 0;
     }
     private void SetCkeckpoint(GameObject checkpoint)
     {
-        checkpoints++;
-        spawnPoint = checkpoint.transform.position;
-        checkpoint.SetActive(false);
+        if(spawnPoint != checkpoint.transform.position)
+        {
+            checkpoints++;
+            spawnPoint = checkpoint.transform.position;
+            checkpoint.SetActive(false);
+
+            Debug.Log("got:" + checkpoints);
+        }
     }
     private bool WinCheck()
     {
-        if(checkpoints >= levelManager.checkpoints.Length)
+        //Debug.Log("max:"+ levelManager.checkpoints.Length+" got:"+checkpoints);
+
+        if (checkpoints >= levelManager.checkpoints.Length)
         {
             Debug.Log("Win");
             return true;

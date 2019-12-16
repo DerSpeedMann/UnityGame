@@ -81,7 +81,7 @@ public class InputManager : MonoBehaviour
                     {
                         var actualPinchDist = Vector2.Distance(finger1.position, finger2.position);
                         var pinchChange = actualPinchDist - startPinchDist;
-                        Debug.Log(Mathf.Abs(pinchChange));
+                        
                         if (Mathf.Abs(pinchChange) > pinchDelta)
                         {
                             Zoom(pinchChange * pincMulti);

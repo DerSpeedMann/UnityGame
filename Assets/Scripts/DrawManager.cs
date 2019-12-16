@@ -12,18 +12,37 @@ public class DrawManager : MonoBehaviour
     private Vector2 lastPoint;
     private int lineCount = 0;
 
+    public GameObject[] noDrawZones;
+
     // Start is called before the first frame update
     void Start()
     {
         lines = new List<GameObject>();
+        noDrawZones = GameObject.FindGameObjectsWithTag("NoDraw");
+    }
+    private bool CanDrawAt(Vector2 point)
+    {
+        Debug.Log("check:" + noDrawZones.Length);
+        foreach (var zone in noDrawZones)
+        {
+            if (zone.GetComponent<BoxCollider2D>().OverlapPoint(point))
+            {
+                Debug.Log(false);
+                return false;
+            }
+        }
+        return true;
     }
     private void AddLine(GameObject line)
     {
+        //Debug.Log("AddLine:" + lineCount);
         lines.Add(line);
         lineCount++;
     }
     public void RemoveLast()
     {
+        //Debug.Log("RemoveLast:" + (lineCount-1));
+
         if(lineCount > 0)
         {
             lineCount--;
@@ -34,20 +53,32 @@ public class DrawManager : MonoBehaviour
 
     public void RemoveLines()
     {
-        foreach(var line in lines)
+        //Debug.Log("RemovedAll:" + lineCount);
+
+        foreach (var line in lines)
         {
             Destroy(line);
             lineCount = 0;
         }
+        lines.Clear();
     }
     public void Draw(Vector3 startPoint)
     {
-        if (activeLine == null)
+        var worldPoint = Camera.main.ScreenToWorldPoint(startPoint);
+        if (CanDrawAt(worldPoint))
         {
-            CreateNewLine();
-        }
+            if (activeLine == null)
+            {
+                CreateNewLine();
+            }
 
-        AddPoint(activeLine, Camera.main.ScreenToWorldPoint(startPoint));
+            AddPoint(activeLine, worldPoint);
+        }
+        else
+        {
+            StopDrawing();
+        }
+       
     }
     public void StopDrawing()
     {
