@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public LevelManager levelManager;
-    public Vector3 spawnPoint;
 
+    private Vector3 spawnPoint;
     private int checkpoints = 0;
     private bool alive = true;
     private Rigidbody2D rigidBody;
@@ -30,6 +30,9 @@ public class PlayerManager : MonoBehaviour
             else if (other.CompareTag("NoDraw"))
             {
 
+            }else if (other.CompareTag("Powerup"))
+            {
+
             }
             else
             {
@@ -38,7 +41,10 @@ public class PlayerManager : MonoBehaviour
             }
         }
     }
-
+    public void SetLevelManager(LevelManager manager)
+    {
+        levelManager = manager;
+    }
     public void ResetPlayer()
     {
         checkpoints = 0;
@@ -55,6 +61,11 @@ public class PlayerManager : MonoBehaviour
         rigidBody.velocity = Vector2.zero;
         rigidBody.angularVelocity = 0;
     }
+    public void SetSpawn(Vector3 point)
+    {
+        spawnPoint = point;
+    }
+
     private void SetCkeckpoint(GameObject checkpoint)
     {
         if(spawnPoint != checkpoint.transform.position)
@@ -77,10 +88,5 @@ public class PlayerManager : MonoBehaviour
         }
         return false;
     }
-
-    public void SetLevelManager(LevelManager manager)
-    {
-        levelManager = manager;
-    }
-
+    
 }

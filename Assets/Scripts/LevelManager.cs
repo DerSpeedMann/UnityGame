@@ -5,22 +5,20 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public GameObject playerPrefab;
-    public GameObject startPoint;
-    public Camera mainCamera;
-    public UIManager uiManager;
+    public CameraManager camManager;
     public DrawManager drawManager;
 
     public bool editorMode = true;
 
+    private GameObject startPoint;
     private GameObject player;
-    private CameraManager camManager;
     public GameObject[] checkpoints;
 
     // Start is called before the first frame update
     void Start()
     {
         checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
-        camManager = mainCamera.GetComponent<CameraManager>();
+        startPoint = GameObject.FindGameObjectsWithTag("Start")[0];
     }
 
     public void StartGame()
@@ -29,8 +27,6 @@ public class LevelManager : MonoBehaviour
         drawManager.StopDrawing();
 
         camManager.SetGameMode(true);
-        uiManager.HideEditorUI(true);
-        uiManager.HideGameUI(false);
 
         SpawnPlayer();
     }
@@ -41,8 +37,6 @@ public class LevelManager : MonoBehaviour
         ResetGame();
 
         camManager.SetGameMode(false);
-        uiManager.HideGameUI(true);
-        uiManager.HideEditorUI(false);
     }
     public void ResetGame()
     {
@@ -50,7 +44,7 @@ public class LevelManager : MonoBehaviour
         {
             checkpoint.SetActive(true);
         }
-        player.GetComponent<PlayerManager>().spawnPoint = startPoint.transform.position;
+        player.GetComponent<PlayerManager>().SetSpawn(startPoint.transform.position);
         player.GetComponent<PlayerManager>().ResetPlayer();
     }
     public void RestartGame()
@@ -70,7 +64,7 @@ public class LevelManager : MonoBehaviour
 
             var playerManager = player.GetComponent<PlayerManager>();
             playerManager.SetLevelManager(this);
-            playerManager.spawnPoint = startPoint.transform.position;
+            playerManager.SetSpawn(startPoint.transform.position);
 
             camManager.SetPlayer(player);
         }

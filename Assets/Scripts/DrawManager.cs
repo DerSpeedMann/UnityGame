@@ -9,10 +9,11 @@ public class DrawManager : MonoBehaviour
 
     private List<GameObject> lines;
     private GameObject activeLine = null;
+
     private Vector2 lastPoint;
     private int lineCount = 0;
 
-    public GameObject[] noDrawZones;
+    private GameObject[] noDrawZones;
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +52,7 @@ public class DrawManager : MonoBehaviour
         }
     }
 
-    public void RemoveLines()
+    public void RemoveAll()
     {
         //Debug.Log("RemovedAll:" + lineCount);
 

@@ -11,10 +11,11 @@ public class InputManager : MonoBehaviour
 
     public bool touchControl = true;
 
+    public float pinchDelta = 5;
+    public float pincMulti = 0.025f;
+    public float dragDelta = 4;
+
     private float startPinchDist;
-    private float pinchDelta = 5;
-    private float pincMulti = 0.025f;
-    private float dragDelta = 4;
 
 
     // Start is called before the first frame update
@@ -26,7 +27,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    void Update()
+    private void FixedUpdate()
     {
         if (levelManager.editorMode)
         {

@@ -9,18 +9,46 @@ public class UIManager : MonoBehaviour
 {
     public GameObject editorHud;
     public GameObject gameHud;
+    public LevelManager levelManager;
+    public DrawManager drawManager;
 
     void Start()
     {
         editorHud.SetActive(true);
         gameHud.SetActive(false);
     }
-    public void HideGameUI(bool hide)
+
+    //Editor HUD
+    public void StartPressed()
     {
-        gameHud.SetActive(!hide);
+        editorHud.SetActive(false);
+        gameHud.SetActive(true);
+
+        levelManager.StartGame();
     }
-    public void HideEditorUI(bool hide)
+    public void UndoPressed()
     {
-        editorHud.SetActive(!hide);
+        drawManager.RemoveLast();
+    }
+    public void ResetPressed()
+    {
+        drawManager.RemoveAll();
+    }
+
+    //Game HUD
+    public void StopPressed()
+    {
+        editorHud.SetActive(true);
+        gameHud.SetActive(false);
+
+        levelManager.StopGame();
+    }
+    public void RestartPressed()
+    {
+        levelManager.RestartGame();
+    }
+    public void RespawnPressed()
+    {
+        levelManager.SpawnPlayer();
     }
 }

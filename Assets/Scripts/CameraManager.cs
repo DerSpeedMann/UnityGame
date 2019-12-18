@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject SpawnPoint;
-
     public float gameSize = 5;
     public float editorSize = 5;
 
     public float minSize = 10f;
     public float maxSize = 150f;
     public float sensitivity = 5f;
+
+    private GameObject startPoint;
+    private GameObject player;
 
     private Vector3 dragOrigin;
     private Vector3 cameraOrigin;
@@ -21,7 +21,8 @@ public class CameraManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        UpdateEditorPosition(SpawnPoint.transform.position);
+        startPoint = GameObject.FindGameObjectsWithTag("Start")[0];
+        UpdateEditorPosition(startPoint.transform.position);
     }
 
     // LateUpdate is called after Update each frame
