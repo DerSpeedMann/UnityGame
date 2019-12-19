@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -11,9 +12,11 @@ public class PlayerManager : MonoBehaviour
     private bool alive = true;
     private Rigidbody2D rigidBody;
 
+
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DrawManager : MonoBehaviour
-{
+{ 
+
     public GameObject drawPrefab;
 
     private List<GameObject> lines;
@@ -98,7 +99,6 @@ public class DrawManager : MonoBehaviour
     private void CreateNewLine()
     {
         activeLine = Instantiate(drawPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-
         var lineRenderer = activeLine.GetComponent<LineRenderer>();
         lineRenderer.positionCount = 0;
     }

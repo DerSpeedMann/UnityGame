@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
     public GameObject playerPrefab;
     public CameraManager camManager;
     public DrawManager drawManager;
+    public UIManager uiManager;
 
     public bool editorMode = true;
 
