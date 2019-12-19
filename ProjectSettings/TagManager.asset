@@ -7,6 +7,7 @@ TagManager:
   - Checkpoint
   - NoDraw
   - Start
+  - Powerup
   layers:
   - Default
   - TransparentFX

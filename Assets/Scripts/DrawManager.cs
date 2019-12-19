@@ -16,19 +16,18 @@ public class DrawManager : MonoBehaviour
     private GameObject[] noDrawZones;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         lines = new List<GameObject>();
         noDrawZones = GameObject.FindGameObjectsWithTag("NoDraw");
     }
+
     private bool CanDrawAt(Vector2 point)
     {
-        Debug.Log("check:" + noDrawZones.Length);
         foreach (var zone in noDrawZones)
         {
             if (zone.GetComponent<BoxCollider2D>().OverlapPoint(point))
             {
-                Debug.Log(false);
                 return false;
             }
         }

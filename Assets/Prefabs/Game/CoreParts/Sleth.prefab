@@ -65,6 +65,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -147,6 +148,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -207,9 +209,14 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 0, y: 0.5}
       - {x: -0.49785358, y: 0.5009446}
-      - {x: -0.49858344, y: -0.47972673}
-      - {x: 0.26423565, y: -0.5019441}
-      - {x: 0.40216395, y: -0.37202793}
+      - {x: -0.50105685, y: -0.31967548}
+      - {x: -0.4930501, y: -0.45558864}
+      - {x: -0.4596199, y: -0.5031349}
+      - {x: 0.25870243, y: -0.48585328}
+      - {x: 0.3515614, y: -0.46943027}
+      - {x: 0.38698527, y: -0.45650855}
+      - {x: 0.41046417, y: -0.41225544}
+      - {x: 0.4504794, y: -0.2792303}
       - {x: 0.47993582, y: -0.14468032}
       - {x: 0.49785358, y: 0.5225984}
 --- !u!60 &8574226173655065853
@@ -254,4 +261,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b391e4081ffefdd42a0ec2bc796977a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
+  levelManager: {fileID: 0}
