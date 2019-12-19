@@ -1,5 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+Sleth.prefab
 --- !u!1 &6760726263302974139
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+Sleth.prefab
 --- !u!50 &6760726263302974136
 Rigidbody2D:
   serializedVersion: 4
@@ -111,6 +113,7 @@ PolygonCollider2D:
       - {x: 2.435627, y: -2.1437933}
       - {x: 0.7343715, y: -2.6937096}
       - {x: -2.1888573, y: -2.2317607}
+Sleth.prefab
 --- !u!60 &8574226173655065853
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -160,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 0}
+<<<<<<< HEAD:Assets/Prefabs/Game/Sleth.prefab
 --- !u!212 &4967556263169614320
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -209,3 +213,5 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+=======
+>>>>>>> d7690b9b08ea987532880dabaa1ba9d4275ad358:Assets/Prefabs/Game/CoreParts/Sleth.prefab

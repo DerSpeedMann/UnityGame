@@ -11,14 +11,17 @@ public class LevelManager : MonoBehaviour
 
     public bool editorMode = true;
 
+    public GameObject[] checkpoints;
+    public GameObject[] powerups;
+
     private GameObject startPoint;
     private GameObject player;
-    public GameObject[] checkpoints;
 
     // Start is called before the first frame update
     void Start()
     {
         checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+        powerups = GameObject.FindGameObjectsWithTag("Powerup");
         startPoint = GameObject.FindGameObjectsWithTag("Start")[0];
     }
 
@@ -44,6 +47,10 @@ public class LevelManager : MonoBehaviour
         foreach (var checkpoint in checkpoints)
         {
             checkpoint.SetActive(true);
+        }
+        foreach (var powerup in powerups)
+        {
+            powerup.SetActive(true);
         }
         player.GetComponent<PlayerManager>().SetSpawn(startPoint.transform.position);
         player.GetComponent<PlayerManager>().ResetPlayer();

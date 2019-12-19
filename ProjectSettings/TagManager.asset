@@ -8,7 +8,6 @@ TagManager:
   - NoDraw
   - Start
   - Powerup
-  - Lose
   layers:
   - Default
   - TransparentFX

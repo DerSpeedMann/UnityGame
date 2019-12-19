@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,14 +9,26 @@ public class PlayerManager : MonoBehaviour
 
     private Vector3 spawnPoint;
     private int checkpoints = 0;
+
     private bool alive = true;
     private Rigidbody2D rigidBody;
 
+    private bool boostEnabled = false;
+    private float speedBoost;
 
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
 
+    }
+    private void FixedUpdate()
+    {
+        if (boostEnabled)
+        {
+            var currentMovementVector = transform.right * speedBoost;
+            Debug.Log(currentMovementVector);
+            rigidBody.AddForce(currentMovementVector);
+        }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -28,12 +40,13 @@ public class PlayerManager : MonoBehaviour
             }
             else if (other.CompareTag("Checkpoint"))
             {
-                SetCkeckpoint(other.gameObject);
+                GotCkeckpoint(other.gameObject);
+            }
+            else if (other.CompareTag("Powerup"))
+            {
+                GotPowerup(other.gameObject);
             }
             else if (other.CompareTag("NoDraw"))
-            {
-
-            }else if (other.CompareTag("Powerup"))
             {
 
             }
@@ -44,17 +57,27 @@ public class PlayerManager : MonoBehaviour
             }
         }
     }
+ 
+
     public void SetLevelManager(LevelManager manager)
     {
         levelManager = manager;
     }
+    public void SetSpawn(Vector3 point)
+    {
+        spawnPoint = point;
+    }
+
+    //Spawn and Respawn logic
     public void ResetPlayer()
     {
         checkpoints = 0;
+        alive = true;
+        boostEnabled = false;
     }
-
     public void Respawn()
     {
+        boostEnabled = false;
         alive = true;
         StopSleth();
         transform.SetPositionAndRotation(spawnPoint, Quaternion.identity);
@@ -64,12 +87,50 @@ public class PlayerManager : MonoBehaviour
         rigidBody.velocity = Vector2.zero;
         rigidBody.angularVelocity = 0;
     }
-    public void SetSpawn(Vector3 point)
+
+    //Powerups
+    private void GotPowerup(GameObject powerupObject)
     {
-        spawnPoint = point;
+        powerupObject.SetActive(false);
+        var powerup = powerupObject.GetComponent<Powerup>().powerup;
+
+        switch (powerup)
+        {
+            case Powerup.Powerups.SpeedBoost:
+                Debug.Log("SpeedBoost");
+                StartCoroutine(BoostSpeed(4, 5));
+                break;
+            case Powerup.Powerups.Hover:
+                Debug.Log("Hover");
+                StartCoroutine(Hover(2, 5));
+                break;
+        }
+    }
+    IEnumerator BoostSpeed(float speed, float duration)
+    {
+        Debug.Log("boost started");
+        speedBoost = speed*5;
+        boostEnabled = true;
+
+        yield return new WaitForSeconds(duration);
+
+        boostEnabled = false;
+        Debug.Log("boost ended");
+    }
+    IEnumerator Hover(float drag, float duration)
+    {
+        var oldGravity = rigidBody.gravityScale;
+        Debug.Log("hover started");
+        rigidBody.gravityScale /= drag;
+ 
+        yield return new WaitForSeconds(duration);
+
+        rigidBody.gravityScale = oldGravity;
+        Debug.Log("boost ended");
     }
 
-    private void SetCkeckpoint(GameObject checkpoint)
+    //Checkpoint and Win Logic
+    private void GotCkeckpoint(GameObject checkpoint)
     {
         if(spawnPoint != checkpoint.transform.position)
         {
