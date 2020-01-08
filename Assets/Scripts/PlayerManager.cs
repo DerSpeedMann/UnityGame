@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     public LevelManager levelManager;
+    public UIManager uiManager;
 
     private Vector3 spawnPoint;
     private int checkpoints = 0;
@@ -52,17 +53,21 @@ public class PlayerManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("ded");
-                alive = false;
+                SetAlive(false);
             }
         }
     }
  
-
     public void SetLevelManager(LevelManager manager)
     {
         levelManager = manager;
     }
+    public void SetUIManager(UIManager manager)
+    {
+        uiManager = manager;
+        Debug.Log(uiManager);
+    }
+
     public void SetSpawn(Vector3 point)
     {
         spawnPoint = point;
@@ -72,13 +77,13 @@ public class PlayerManager : MonoBehaviour
     public void ResetPlayer()
     {
         checkpoints = 0;
-        alive = true;
+        SetAlive(true);
         boostEnabled = false;
     }
     public void Respawn()
     {
         boostEnabled = false;
-        alive = true;
+        SetAlive(true);
         StopSleth();
         transform.SetPositionAndRotation(spawnPoint, Quaternion.identity);
     }
@@ -86,6 +91,19 @@ public class PlayerManager : MonoBehaviour
     {
         rigidBody.velocity = Vector2.zero;
         rigidBody.angularVelocity = 0;
+    }
+    public void SetAlive(bool alive)
+    {
+        this.alive = alive;
+        if (!alive)
+        {
+            uiManager.EnableLose(true);
+        }
+        else
+        {
+            uiManager.EnableLose(false);
+            uiManager.EnableWin(false);
+        }
     }
 
     //Powerups
@@ -147,7 +165,7 @@ public class PlayerManager : MonoBehaviour
 
         if (checkpoints >= levelManager.checkpoints.Length)
         {
-            Debug.Log("Win");
+            uiManager.EnableWin(true);
             return true;
         }
         return false;

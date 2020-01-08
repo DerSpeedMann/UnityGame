@@ -72,9 +72,12 @@ public class LevelManager : MonoBehaviour
 
             var playerManager = player.GetComponent<PlayerManager>();
             playerManager.SetLevelManager(this);
+            playerManager.SetUIManager(uiManager);
             playerManager.SetSpawn(startPoint.transform.position);
 
             camManager.SetPlayer(player);
+
+            Debug.Log(uiManager);
         }
     }
 }

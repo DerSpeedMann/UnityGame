@@ -25,9 +25,6 @@ public class UIManager : MonoBehaviour
 
         EnableLose(false);
         EnableWin(false);
-
-        //TODO: on win EnableWin(true)
-        // on lose EnableLose(true)
     }
 
     //Editor HUD

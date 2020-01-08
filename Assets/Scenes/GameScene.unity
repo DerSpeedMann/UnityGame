@@ -152,6 +152,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 18.173296, y: 22.01}
   m_EdgeRadius: 0
+--- !u!114 &113621765 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1451766327409725931, guid: c32b610be6412f94587c7e8f2a7c370a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5555560969019755703}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6300ca32d790afc43a91dcdddff6b069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &240834471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -677,17 +689,17 @@ PrefabInstance:
     - target: {fileID: 7053328424151146693, guid: 813398cfa7bbca64a985ec9b084d152c,
         type: 3}
       propertyPath: m_Name
-      value: NoDrawZone
+      value: NoDrawZone(Birds)
       objectReference: {fileID: 0}
     - target: {fileID: 7053328424151146695, guid: 813398cfa7bbca64a985ec9b084d152c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.67
+      value: -15.213
       objectReference: {fileID: 0}
     - target: {fileID: 7053328424151146695, guid: 813398cfa7bbca64a985ec9b084d152c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.476
+      value: -4.326
       objectReference: {fileID: 0}
     - target: {fileID: 7053328424151146695, guid: 813398cfa7bbca64a985ec9b084d152c,
         type: 3}
@@ -756,12 +768,12 @@ PrefabInstance:
     - target: {fileID: 1198734231427327937, guid: c7071485b5ac1ae4c9eb55da05f65138,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.01
+      value: -18.58
       objectReference: {fileID: 0}
     - target: {fileID: 1198734231427327937, guid: c7071485b5ac1ae4c9eb55da05f65138,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -13.88
+      value: -4.22
       objectReference: {fileID: 0}
     - target: {fileID: 1198734231427327937, guid: c7071485b5ac1ae4c9eb55da05f65138,
         type: 3}
@@ -1031,6 +1043,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelHud
       objectReference: {fileID: 0}
+    - target: {fileID: 5555560968931627205, guid: c32b610be6412f94587c7e8f2a7c370a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5985924193260223277, guid: c32b610be6412f94587c7e8f2a7c370a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1096,11 +1113,6 @@ PrefabInstance:
       propertyPath: drawManager
       value: 
       objectReference: {fileID: 652336436}
-    - target: {fileID: 5555560968931627205, guid: c32b610be6412f94587c7e8f2a7c370a,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5555560969676565066, guid: c32b610be6412f94587c7e8f2a7c370a,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -1158,6 +1170,11 @@ PrefabInstance:
       propertyPath: camManager
       value: 
       objectReference: {fileID: 519420030}
+    - target: {fileID: 6193532226603705900, guid: 364655703f8bb66418c62d480b2829fb,
+        type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 113621765}
     - target: {fileID: 6193532226603705896, guid: 364655703f8bb66418c62d480b2829fb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1221,7 +1238,7 @@ PrefabInstance:
     - target: {fileID: 6193532226603705901, guid: 364655703f8bb66418c62d480b2829fb,
         type: 3}
       propertyPath: touchControl
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 364655703f8bb66418c62d480b2829fb, type: 3}
