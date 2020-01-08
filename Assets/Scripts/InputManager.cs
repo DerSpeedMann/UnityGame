@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour
     public bool touchControl = true;
 
     public float pinchDelta = 5;
-    public float pincMulti = 0.025f;
+    public float pinchMulti = 0.025f;
     public float dragDelta = 4;
 
     private float startPinchDist;
@@ -21,7 +21,7 @@ public class InputManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (Application.platform == RuntimePlatform.Android)
+        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
         {
             touchControl = true;
         }
@@ -85,7 +85,7 @@ public class InputManager : MonoBehaviour
                         
                         if (Mathf.Abs(pinchChange) > pinchDelta)
                         {
-                            Zoom(pinchChange * pincMulti);
+                            Zoom(pinchChange * pinchMulti);
                             startPinchDist = actualPinchDist;
                         }
                         else if(Mathf.Abs(pinchChange) < dragDelta)

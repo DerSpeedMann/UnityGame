@@ -1,6 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
-Sleth.prefab
 --- !u!1 &6760726263302974139
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,13 +29,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6760726263302974139}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1834, y: 6.7042, z: 0.08379811}
-  m_LocalScale: {x: 0.117093526, y: 0.09851046, z: 0.3278953}
+  m_LocalPosition: {x: -11.573, y: -7.239, z: 0}
+  m_LocalScale: {x: 0.117972, y: 0.117972, z: 0.117972}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-Sleth.prefab
 --- !u!50 &6760726263302974136
 Rigidbody2D:
   serializedVersion: 4
@@ -49,11 +47,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 4
+  m_Mass: 2.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 52bb1cd54498e3b4cbe8da29d86d41ad, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -67,7 +65,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 6760726263302974139}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 52bb1cd54498e3b4cbe8da29d86d41ad, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -83,37 +81,20 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -3.4530153, y: -1.7898042}
-      - {x: -5.6955485, y: 0.1985302}
-      - {x: -6.2498026, y: 2.6605139}
-      - {x: -6.763385, y: 4.04196}
-      - {x: -8.230643, y: 4.069252}
-      - {x: -8.097102, y: 5.0624127}
-      - {x: -10.872644, y: 4.9528694}
-      - {x: -12.112273, y: 3.8636103}
-      - {x: -12.516193, y: 2.3432896}
-      - {x: -11.147421, y: 0.49286368}
-      - {x: -11.350679, y: -2.4822447}
-      - {x: -10.319801, y: -4.408186}
-      - {x: -8.609227, y: -5.5098705}
-      - {x: -11.274195, y: -5.7294936}
-      - {x: -12.9310875, y: -7.225474}
-      - {x: -12.99284, y: -7.968768}
-      - {x: 8.27337, y: -7.8217354}
-      - {x: 12.958321, y: -2.7947996}
-      - {x: 12.702525, y: -1.185009}
-      - {x: 10.7303095, y: -1.059284}
-      - {x: 9.056987, y: -2.8131552}
-      - {x: 5.207817, y: -5.5425563}
-      - {x: 7.5792303, y: -3.5885446}
-      - {x: 7.4794016, y: 0.10914062}
-      - {x: 5.571049, y: 0.34443566}
-      - {x: 5.0304823, y: -0.6366223}
-      - {x: 2.7395723, y: -1.0487912}
-      - {x: 2.435627, y: -2.1437933}
-      - {x: 0.7343715, y: -2.6937096}
-      - {x: -2.1888573, y: -2.2317607}
-Sleth.prefab
+    - - {x: 11.491956, y: -4.6571684}
+      - {x: 12.53031, y: -3.1086445}
+      - {x: 12.599382, y: -1.2261784}
+      - {x: 6.484606, y: 0.20564747}
+      - {x: 2.8447468, y: -1.2083533}
+      - {x: -4.5533643, y: -0.9558673}
+      - {x: -6.3556676, y: 2.7794776}
+      - {x: -12.385466, y: 2.4426017}
+      - {x: -11.012942, y: -5.3094306}
+      - {x: -12.850438, y: -7.218441}
+      - {x: -12.91747, y: -7.812229}
+      - {x: -11.966444, y: -8.056536}
+      - {x: 7.289834, y: -7.745813}
+      - {x: 8.698347, y: -7.1976686}
 --- !u!60 &8574226173655065853
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -139,17 +120,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.8629744, y: 7.8625793}
-      - {x: -2.4011974, y: 8.072917}
-      - {x: -6.7466555, y: 4.289009}
-      - {x: -3.2255995, y: 2.040154}
-      - {x: -3.6459224, y: -1.7587017}
-      - {x: -1.082003, y: -2.6986206}
-      - {x: 1.6201992, y: -2.5828247}
-      - {x: 2.3897567, y: -2.1895213}
+    - - {x: -6.8530903, y: 4.4072046}
+      - {x: -3.6537886, y: -1.0362437}
       - {x: 1.5443075, y: -1.3896846}
-      - {x: 0.17515057, y: 3.4968472}
-      - {x: 0.32476118, y: 6.4815626}
+      - {x: -0.08291012, y: 7.2935815}
+      - {x: -2.0049746, y: 8.023039}
 --- !u!114 &761960351232067009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 0}
-<<<<<<< HEAD:Assets/Prefabs/Game/Sleth.prefab
 --- !u!212 &4967556263169614320
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -213,5 +187,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-=======
->>>>>>> d7690b9b08ea987532880dabaa1ba9d4275ad358:Assets/Prefabs/Game/CoreParts/Sleth.prefab
