@@ -9,12 +9,14 @@ public class LevelManager : MonoBehaviour
     public DrawManager drawManager;
     public UIManager uiManager;
 
-    public bool editorMode = true;
-
     public GameObject[] checkpoints;
     public GameObject[] powerups;
 
-    private GameObject startPoint;
+    public Vector3 spawnOffset = new Vector3(0, 1.5f, 0);
+
+    public bool editorMode = true;
+
+    private Vector3 startPoint;
     private GameObject player;
 
     // Start is called before the first frame update
@@ -22,7 +24,7 @@ public class LevelManager : MonoBehaviour
     {
         checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
         powerups = GameObject.FindGameObjectsWithTag("Powerup");
-        startPoint = GameObject.FindGameObjectsWithTag("Start")[0];
+        startPoint = GameObject.FindGameObjectsWithTag("Start")[0].transform.position + spawnOffset;
     }
 
     public void StartGame()
@@ -52,7 +54,7 @@ public class LevelManager : MonoBehaviour
         {
             powerup.SetActive(true);
         }
-        player.GetComponent<PlayerManager>().SetSpawn(startPoint.transform.position);
+        player.GetComponent<PlayerManager>().SetSpawn(startPoint);
         player.GetComponent<PlayerManager>().ResetPlayer();
     }
     public void RestartGame()
@@ -68,12 +70,12 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            player = Instantiate(playerPrefab, startPoint.transform.position, Quaternion.identity);
+            player = Instantiate(playerPrefab, startPoint, Quaternion.identity);
 
             var playerManager = player.GetComponent<PlayerManager>();
             playerManager.SetLevelManager(this);
             playerManager.SetUIManager(uiManager);
-            playerManager.SetSpawn(startPoint.transform.position);
+            playerManager.SetSpawn(startPoint);
 
             camManager.SetPlayer(player);
 

@@ -27,7 +27,7 @@ public class DrawManager : MonoBehaviour
     {
         foreach (var zone in noDrawZones)
         {
-            if (zone.GetComponent<BoxCollider2D>().OverlapPoint(point))
+            if (zone.GetComponent<PolygonCollider2D>().OverlapPoint(point))
             {
                 return false;
             }
