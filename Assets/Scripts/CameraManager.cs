@@ -52,8 +52,19 @@ public class CameraManager : MonoBehaviour
     }
     public void Drag(Vector3 actual)
     {
-        var xDrag = 4 * Camera.main.orthographicSize;
-        var yDrag = 2 * Camera.main.orthographicSize;
+        float xDrag, yDrag;
+
+        if (Screen.width < Screen.height)
+        {
+            xDrag = 1.5f * Camera.main.orthographicSize;
+            yDrag = 2 * Camera.main.orthographicSize;
+        }
+        else
+        {
+            xDrag = 2 * Camera.main.orthographicSize;
+            yDrag = 1.5f * Camera.main.orthographicSize;
+        }
+
 
         Vector3 pos = Camera.main.ScreenToViewportPoint(actual - dragOrigin);
         Vector3 move = new Vector3(pos.x * xDrag, pos.y * yDrag, 0);
