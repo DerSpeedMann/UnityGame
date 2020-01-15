@@ -161,7 +161,7 @@ public class PlayerManager : MonoBehaviour
     }
     private bool WinCheck()
     {
-        //Debug.Log("max:"+ levelManager.checkpoints.Length+" got:"+checkpoints);
+        Debug.Log("max:"+ levelManager.checkpoints.Length+" got:"+checkpoints);
 
         if (checkpoints >= levelManager.checkpoints.Length)
         {
