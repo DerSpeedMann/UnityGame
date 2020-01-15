@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
     private int checkpoints = 0;
 
     private bool alive = true;
+    private bool won = flase;
     private Rigidbody2D rigidBody;
 
     private bool boostEnabled = false;
@@ -33,7 +34,7 @@ public class PlayerManager : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (alive)
+        if (alive && !won)
         {
             if (other.CompareTag("Finish"))
             {
@@ -78,12 +79,14 @@ public class PlayerManager : MonoBehaviour
     {
         checkpoints = 0;
         SetAlive(true);
+        won = false;
         boostEnabled = false;
     }
     public void Respawn()
     {
         boostEnabled = false;
         SetAlive(true);
+        won = false;
         StopSleth();
         transform.SetPositionAndRotation(spawnPoint, Quaternion.identity);
     }
@@ -166,6 +169,7 @@ public class PlayerManager : MonoBehaviour
         if (checkpoints >= levelManager.checkpoints.Length)
         {
             uiManager.EnableWin(true);
+            won = true;
             return true;
         }
         return false;
