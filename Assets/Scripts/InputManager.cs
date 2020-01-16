@@ -27,7 +27,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (levelManager.editorMode)
         {
