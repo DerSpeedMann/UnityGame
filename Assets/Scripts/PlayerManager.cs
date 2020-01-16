@@ -9,26 +9,25 @@ public class PlayerManager : MonoBehaviour
     public UIManager uiManager;
 
     private Vector3 spawnPoint;
-    private int checkpoints = 0;
 
     private bool alive = true;
-    private bool won = flase;
+    private bool won = false;
     private Rigidbody2D rigidBody;
 
     private bool boostEnabled = false;
     private float speedBoost;
+    private float defaultGravityScale;
 
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-
+        defaultGravityScale = rigidBody.gravityScale;
     }
     private void FixedUpdate()
     {
         if (boostEnabled)
         {
             var currentMovementVector = transform.right * speedBoost;
-            Debug.Log(currentMovementVector);
             rigidBody.AddForce(currentMovementVector);
         }
     }
@@ -38,7 +37,7 @@ public class PlayerManager : MonoBehaviour
         {
             if (other.CompareTag("Finish"))
             {
-                WinCheck();
+                won = levelManager.WinCheck();
             }
             else if (other.CompareTag("Checkpoint"))
             {
@@ -77,17 +76,17 @@ public class PlayerManager : MonoBehaviour
     //Spawn and Respawn logic
     public void ResetPlayer()
     {
-        checkpoints = 0;
         SetAlive(true);
         won = false;
+
         boostEnabled = false;
+        rigidBody.gravityScale = defaultGravityScale;
+
+        StopSleth();
     }
     public void Respawn()
     {
-        boostEnabled = false;
-        SetAlive(true);
-        won = false;
-        StopSleth();
+        ResetPlayer();
         transform.SetPositionAndRotation(spawnPoint, Quaternion.identity);
     }
     public void StopSleth()
@@ -113,17 +112,15 @@ public class PlayerManager : MonoBehaviour
     private void GotPowerup(GameObject powerupObject)
     {
         powerupObject.SetActive(false);
-        var powerup = powerupObject.GetComponent<Powerup>().powerup;
+        var powerupManager = powerupObject.GetComponent<Powerup>();
 
-        switch (powerup)
+        switch (powerupManager.powerup)
         {
             case Powerup.Powerups.SpeedBoost:
-                Debug.Log("SpeedBoost");
-                StartCoroutine(BoostSpeed(4, 5));
+                StartCoroutine(BoostSpeed(powerupManager.speedBoost, powerupManager.duration));
                 break;
             case Powerup.Powerups.Hover:
-                Debug.Log("Hover");
-                StartCoroutine(Hover(2, 5));
+                StartCoroutine(Hover(powerupManager.hoverValue, powerupManager.duration));
                 break;
         }
     }
@@ -140,39 +137,34 @@ public class PlayerManager : MonoBehaviour
     }
     IEnumerator Hover(float drag, float duration)
     {
-        var oldGravity = rigidBody.gravityScale;
-        Debug.Log("hover started");
-        rigidBody.gravityScale /= drag;
+        if(rigidBody.gravityScale == defaultGravityScale)
+        {
+            defaultGravityScale = rigidBody.gravityScale;
+            Debug.Log("hover started");
+            rigidBody.gravityScale *= -drag;
+        }
+        else
+        {
+            Debug.Log("hover started");
+            rigidBody.gravityScale = defaultGravityScale * -drag;
+        }
  
         yield return new WaitForSeconds(duration);
 
-        rigidBody.gravityScale = oldGravity;
-        Debug.Log("boost ended");
+        rigidBody.gravityScale = defaultGravityScale;
+        Debug.Log("hover ended");
     }
 
-    //Checkpoint and Win Logic
+    //Checkpoint
     private void GotCkeckpoint(GameObject checkpoint)
     {
         if(spawnPoint != checkpoint.transform.position)
         {
-            checkpoints++;
+            levelManager.GotCheckpoint();
             spawnPoint = checkpoint.transform.position;
             checkpoint.SetActive(false);
-
-            Debug.Log("got:" + checkpoints);
         }
     }
-    private bool WinCheck()
-    {
-        Debug.Log("max:"+ levelManager.checkpoints.Length+" got:"+checkpoints);
 
-        if (checkpoints >= levelManager.checkpoints.Length)
-        {
-            uiManager.EnableWin(true);
-            won = true;
-            return true;
-        }
-        return false;
-    }
     
 }

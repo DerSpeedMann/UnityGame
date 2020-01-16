@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
     private Vector3 startPoint;
     private GameObject player;
 
+    private int checkpointCounter = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +56,8 @@ public class LevelManager : MonoBehaviour
         {
             powerup.SetActive(true);
         }
+        checkpointCounter = 0;
+
         player.GetComponent<PlayerManager>().SetSpawn(startPoint);
         player.GetComponent<PlayerManager>().ResetPlayer();
     }
@@ -78,8 +82,25 @@ public class LevelManager : MonoBehaviour
             playerManager.SetSpawn(startPoint);
 
             camManager.SetPlayer(player);
-
-            Debug.Log(uiManager);
         }
     }
+
+    //Checkpoint / win logic
+    public void GotCheckpoint()
+    {
+        checkpointCounter += 1;
+        Debug.Log("checkpoints reached:" + checkpoints);
+    }
+    public bool WinCheck()
+    {
+        Debug.Log("max:" + checkpoints.Length + " got:" + checkpointCounter);
+
+        if (checkpointCounter >= checkpoints.Length)
+        {
+            uiManager.EnableWin(true);
+            return true;
+        }
+        return false;
+    }
+
 }
