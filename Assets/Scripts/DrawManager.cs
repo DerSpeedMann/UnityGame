@@ -63,6 +63,8 @@ public class DrawManager : MonoBehaviour
         }
         lines.Clear();
     }
+
+
     public void Draw(Vector3 startPoint)
     {
         var worldPoint = Camera.main.ScreenToWorldPoint(startPoint);
@@ -104,12 +106,13 @@ public class DrawManager : MonoBehaviour
 
     private void AddPoint(GameObject line, Vector3 newPoint)
     {
-        var absX = Math.Abs(newPoint.x - lastPoint.x);
-        var absY = Math.Abs(newPoint.y - lastPoint.y);
+        var distance = Vector2.Distance(newPoint, lastPoint);
+        var lineRenderer = line.GetComponent<LineRenderer>();
 
-        if ( absX > 1 || absY > 1)
+        if ( distance > 1 || lineRenderer.positionCount <= 0)
         {
-            var lineRenderer = line.GetComponent<LineRenderer>();
+            //Debug.Log("Draw: distance last to new Point " + distance);
+
             newPoint.z = 0;
             lineRenderer.SetPosition(lineRenderer.positionCount++, newPoint);
             lastPoint = newPoint;
@@ -120,9 +123,10 @@ public class DrawManager : MonoBehaviour
         var lineRenderer = line.GetComponent<LineRenderer>();
         var collider = line.GetComponent<PolygonCollider2D>();
 
-        // get 3d mesh of drawn line
+        
         if (lineRenderer.positionCount > 1)
         {
+            // get 3d mesh of drawn line
             var mesh = new Mesh();
             lineRenderer.BakeMesh(mesh);
             SetPolygonCollider2DFromMesh(collider, mesh);
