@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class LevelSelect : MonoBehaviour
 {
+    public Sprite disabledButtonImg;
     public Button[] levelButtons;
     public static int unlockedIndex;
 
@@ -14,7 +15,9 @@ public class LevelSelect : MonoBehaviour
 
         for(int i = levelButtons.Length-1; i > unlockedIndex; i--)
         {
-            levelButtons[i].GetComponent<Button>().interactable = false;
+            Button b = levelButtons[i].GetComponent<Button>();
+            b.interactable = false;
+            b.image.sprite = disabledButtonImg;
         }
     }
 
