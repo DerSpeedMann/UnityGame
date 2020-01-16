@@ -20,13 +20,13 @@ public class SceneSwitcher : MonoBehaviour
         SceneManager.LoadScene("Level3");
     }
 
-    public void GoToLevelSelection()
-    {
-        SceneManager.LoadScene("LevelSelection");
-    }
-
     public void GoToMenu()
     {
         SceneManager.LoadScene("StartScene");
+    }
+
+    public void GoToLevelSelection()
+    {
+        SceneManager.LoadScene("LevelSelection");
     }
 }
