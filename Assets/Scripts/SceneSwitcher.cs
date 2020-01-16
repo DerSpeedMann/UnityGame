@@ -5,13 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
-   public void GoToGame()
+   public void GoToLevel1()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("Level1");
+    }
+
+    public void GoToLevel2()
+    {
+        SceneManager.LoadScene("Level2");
+    }
+
+    public void GoToLevel3()
+    {
+        SceneManager.LoadScene("Level3");
     }
 
     public void GoToLevelSelection()
     {
         SceneManager.LoadScene("LevelSelection");
+    }
+
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 }
