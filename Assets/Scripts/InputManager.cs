@@ -21,7 +21,7 @@ public class InputManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        if (Application.platform != RuntimePlatform.WindowsEditor)
         {
             touchControl = true;
         }
