@@ -21,10 +21,13 @@ public class InputManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(Application.platform);
         if (Application.platform != RuntimePlatform.WindowsEditor)
         {
             touchControl = true;
         }
+
+        Debug.Log("touch: " + touchControl);
     }
 
     private void Update()
