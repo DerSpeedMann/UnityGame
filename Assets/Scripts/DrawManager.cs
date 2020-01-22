@@ -113,6 +113,12 @@ public class DrawManager : MonoBehaviour
         {
             //Debug.Log("Draw: distance last to new Point " + distance);
 
+            if(lineRenderer.positionCount > 0 && IntersectsNoDraw(lastPoint, newPoint))
+            {
+                StopDrawing();
+                return;
+            }
+            
             newPoint.z = 0;
             lineRenderer.SetPosition(lineRenderer.positionCount++, newPoint);
             lastPoint = newPoint;
@@ -134,6 +140,88 @@ public class DrawManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+    private bool IntersectsNoDraw(Vector2 p1, Vector2 p2)
+    {
+        foreach(var zone in noDrawZones)
+        {
+            var collider = zone.GetComponent<PolygonCollider2D>();
+            if(collider.points.Length >= 2)
+            {
+
+                var prevPoint = collider.transform.TransformPoint(collider.points[0]);
+
+                for (int i = 1; i <= collider.points.Length; i++)
+                {
+                    Vector2 point;
+
+                    if(i == collider.points.Length)
+                    {
+                       point = collider.transform.TransformPoint(collider.points[0]);
+                    }
+                    else
+                    {
+                       point = collider.transform.TransformPoint(collider.points[i]);
+                    }
+                    
+                    if (FasterLineSegmentIntersection(prevPoint, point, p1, p2))
+                    {
+                        //Debug.Log("IntersectsNoDraw: " + p1 + " " + p2 + " | " + prevPoint + " " + point);
+                        return true;
+                    }
+                    prevPoint = point;
+                }
+            }
+        }
+        return false;
+    }
+
+    static bool FasterLineSegmentIntersection(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4)
+    {
+
+        Vector2 a = p2 - p1;
+        Vector2 b = p3 - p4;
+        Vector2 c = p1 - p3;
+
+        float alphaNumerator = b.y * c.x - b.x * c.y;
+        float alphaDenominator = a.y * b.x - a.x * b.y;
+        float betaNumerator = a.x * c.y - a.y * c.x;
+        float betaDenominator = a.y * b.x - a.x * b.y;
+
+        bool doIntersect = true;
+
+        if (alphaDenominator == 0 || betaDenominator == 0)
+        {
+            doIntersect = false;
+        }
+        else
+        {
+
+            if (alphaDenominator > 0)
+            {
+                if (alphaNumerator < 0 || alphaNumerator > alphaDenominator)
+                {
+                    doIntersect = false;
+
+                }
+            }
+            else if (alphaNumerator > 0 || alphaNumerator < alphaDenominator)
+            {
+                doIntersect = false;
+            }
+
+            if (doIntersect || betaDenominator > 0) {
+                if (betaNumerator < 0 || betaNumerator > betaDenominator)
+                {
+                    doIntersect = false;
+                }
+            } else if (betaNumerator > 0 || betaNumerator < betaDenominator)
+            {
+                doIntersect = false;
+            }
+        }
+
+        return doIntersect;
     }
 
     private void SetPolygonCollider2DFromMesh(PolygonCollider2D polygonCollider, Mesh mesh)

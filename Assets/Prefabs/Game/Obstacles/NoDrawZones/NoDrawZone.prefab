@@ -103,7 +103,7 @@ PolygonCollider2D:
     adaptiveTilingThreshold: 0.25
     drawMode: 0
     adaptiveTiling: 1
-  m_AutoTiling: 1
+  m_AutoTiling: 0
   m_Points:
     m_Paths:
     - - {x: 0.5211965, y: -6.499769}
