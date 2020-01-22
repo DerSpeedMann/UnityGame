@@ -8,7 +8,7 @@ public class CameraManager : MonoBehaviour
     public float editorSize = 5;
 
     public float minSize = 10f;
-    public float maxSize = 150f;
+    public float maxSize = 300f;
     public float sensitivity = 5f;
 
     private GameObject startPoint;
