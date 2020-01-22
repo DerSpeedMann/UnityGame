@@ -11,9 +11,9 @@ public class InputManager : MonoBehaviour
 
     public bool touchControl = true;
 
-    public float pinchDelta = 6;
-    public float pinchMulti = 0.025f;
-    public float dragDelta = 4;
+    public float pinchDelta;
+    public float pinchMulti;
+    public float dragDelta;
 
     private float startPinchDist;
 
