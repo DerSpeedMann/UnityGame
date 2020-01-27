@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/other/LevelSelection.unity
     guid: 8e1fe60dc847441bd8c39094fe038eea
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Levels/TestLevel.unity
     guid: e5571e5efe1c2164fbd6553a5b45a8cb
   - enabled: 1

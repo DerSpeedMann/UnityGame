@@ -12,7 +12,8 @@ public class InputManager : MonoBehaviour
     public bool touchControl = true;
 
     public float pinchDelta;
-    public float pinchMulti;
+    public float pinchMultiMin; //min drag increase while pinching (zoomed all the way in)
+    public float pinchMultiMax; //max drag increase while pinching (zoomed all the way out)
     public float dragDelta;
 
     private float startPinchDist;
@@ -85,6 +86,8 @@ public class InputManager : MonoBehaviour
                         
                         if (Mathf.Abs(pinchChange) > pinchDelta)
                         {
+                            var pinchMulti = camManager.zoomPercentage * (pinchMultiMax - pinchMultiMin) + pinchMultiMin;
+
                             Zoom(pinchChange * pinchMulti);
                             startPinchDist = actualPinchDist;
                         }

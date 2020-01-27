@@ -11,6 +11,8 @@ public class CameraManager : MonoBehaviour
     public float maxSize = 300f;
     public float sensitivity = 5f;
 
+    public float zoomPercentage; //zoom percentage (0-1)
+
     private GameObject startPoint;
     private GameObject player;
 
@@ -50,19 +52,19 @@ public class CameraManager : MonoBehaviour
         dragOrigin = origin;
         cameraOrigin = Camera.main.transform.position;
     }
-    public void Drag(Vector3 actual)
+    public void Drag(Vector3 actual, float heightMulti = 2, float widthMulti = 0.9f)
     {
         float xDrag, yDrag;
 
         if (Screen.width < Screen.height)
         {
-            xDrag = 1.5f * Camera.main.orthographicSize;
-            yDrag = 2 * Camera.main.orthographicSize;
+            xDrag = widthMulti * Camera.main.orthographicSize;
+            yDrag = heightMulti * Camera.main.orthographicSize;
         }
         else
         {
-            xDrag = 2 * Camera.main.orthographicSize;
-            yDrag = 1.5f * Camera.main.orthographicSize;
+            xDrag = heightMulti * Camera.main.orthographicSize;
+            yDrag = widthMulti * Camera.main.orthographicSize;
         }
 
 
@@ -80,6 +82,7 @@ public class CameraManager : MonoBehaviour
             size = Mathf.Clamp(size, minSize, maxSize);
 
             Camera.main.orthographicSize = editorSize = size;
+            zoomPercentage = (size - minSize) / (maxSize - minSize);
         }
     }
     public void UpdateGamePosition(GameObject target)
