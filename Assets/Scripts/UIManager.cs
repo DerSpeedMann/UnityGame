@@ -67,10 +67,6 @@ public class UIManager : MonoBehaviour
         if(enable)
         {
             winImg.enabled = true;
-            if (LevelSelect.unlockedIndex < 2)
-            {
-                LevelSelect.unlockedIndex++;
-            }
         } else
         {
             winImg.enabled = false;

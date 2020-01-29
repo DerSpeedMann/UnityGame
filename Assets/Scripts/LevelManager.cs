@@ -16,6 +16,8 @@ public class LevelManager : MonoBehaviour
 
     public bool editorMode = true;
 
+    public int LevelNumber = 0;
+
     private Vector3 startPoint;
     private GameObject player;
 
@@ -98,6 +100,11 @@ public class LevelManager : MonoBehaviour
         if (checkpointCounter >= checkpoints.Length)
         {
             uiManager.EnableWin(true);
+
+            if (LevelSelect.unlockedIndex < 2)
+            {
+                LevelSelect.unlockedIndex++;
+            }
             return true;
         }
         return false;
