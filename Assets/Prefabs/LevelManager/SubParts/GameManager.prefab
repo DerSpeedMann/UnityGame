@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6193532226603705898}
   - component: {fileID: 6193532226603705901}
   - component: {fileID: 6193532226603705900}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,11 +61,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawManager: {fileID: 6193532226603705898}
   camManager: {fileID: 0}
-  levelManager: {fileID: 6193532226603705900}
+  levelManager: {fileID: 0}
   touchControl: 1
-  pinchDelta: 5
-  pincMulti: 0.025
-  dragDelta: 4
+  pinchDelta: 10
+  pinchMultiMin: 0.01
+  pinchMultiMax: 0.025
+  dragDelta: 8
 --- !u!114 &6193532226603705900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,5 +83,9 @@ MonoBehaviour:
     type: 3}
   camManager: {fileID: 0}
   drawManager: {fileID: 6193532226603705898}
-  editorMode: 1
+  uiManager: {fileID: 0}
   checkpoints: []
+  powerups: []
+  spawnOffset: {x: 0, y: 1.5, z: 0}
+  editorMode: 1
+  LevelNumber: 0

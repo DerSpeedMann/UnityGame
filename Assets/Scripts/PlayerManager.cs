@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     public LevelManager levelManager;
-    public UIManager uiManager;
 
     private Vector3 spawnPoint;
 
@@ -62,11 +61,6 @@ public class PlayerManager : MonoBehaviour
     {
         levelManager = manager;
     }
-    public void SetUIManager(UIManager manager)
-    {
-        uiManager = manager;
-        Debug.Log(uiManager);
-    }
 
     public void SetSpawn(Vector3 point)
     {
@@ -96,15 +90,9 @@ public class PlayerManager : MonoBehaviour
     }
     public void SetAlive(bool alive)
     {
-        this.alive = alive;
-        if (!alive)
+        if (this.alive != alive && alive == false)
         {
-            uiManager.EnableLose(true);
-        }
-        else
-        {
-            uiManager.EnableLose(false);
-            uiManager.EnableWin(false);
+            levelManager.Lost();
         }
     }
 

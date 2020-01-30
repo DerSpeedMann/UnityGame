@@ -8,31 +8,27 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject editorHud;
-    public GameObject gameHud;
+    public Canvas[] availableHUDs;
+
     public LevelManager levelManager;
     public DrawManager drawManager;
 
-    private Image loseImg;
-    private Image winImg;
+    private Canvas activeHud;
 
     void Start()
     {
-        editorHud.SetActive(true);
-        gameHud.SetActive(false);
+        foreach (Canvas hud in availableHUDs)
+        {
+            hud.gameObject.SetActive(false);
+        }
+        SetActiveHud("EditorHud");
 
-        loseImg = gameHud.transform.Find("loseImg").GetComponent<Image>();
-        winImg = gameHud.transform.Find("winImg").GetComponent<Image>();
-
-        EnableLose(false);
-        EnableWin(false);
     }
 
     //Editor HUD
     public void StartPressed()
     {
-        editorHud.SetActive(false);
-        gameHud.SetActive(true);
+        SetActiveHud("GameHud");
 
         levelManager.StartGame();
     }
@@ -48,8 +44,7 @@ public class UIManager : MonoBehaviour
     //Game HUD
     public void StopPressed()
     {
-        editorHud.SetActive(true);
-        gameHud.SetActive(false);
+        SetActiveHud("EditorHud");
 
         levelManager.StopGame();
     }
@@ -62,27 +57,23 @@ public class UIManager : MonoBehaviour
         levelManager.SpawnPlayer();
     }
 
-    public void EnableWin(bool enable)
+    public bool SetActiveHud(string name)
     {
-        if(enable)
+        foreach (Canvas hud in availableHUDs)
         {
-            winImg.enabled = true;
-        } else
-        {
-            winImg.enabled = false;
-        }
-    }
+           if(hud.name == name)
+           {
+                if(activeHud != null)
+                {
+                    activeHud.gameObject.SetActive(false);
+                }
 
-    public void EnableLose(bool enable)
-    {
-        if (enable)
-        {
-            loseImg.enabled = true;
+                activeHud = hud;
+                activeHud.gameObject.SetActive(true);
+                return true;
+            }
         }
-        else
-        {
-            loseImg.enabled = false;
-        }
+        return false;
     }
 
     public void GoToLevelSelection()

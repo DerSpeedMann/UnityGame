@@ -100,8 +100,9 @@ MonoBehaviour:
   gameSize: 5
   editorSize: 5
   minSize: 5
-  maxSize: 400
+  maxSize: 200
   sensitivity: 5
+  zoomPercentage: 0
 --- !u!82 &5358200598663021048
 AudioSource:
   m_ObjectHideFlags: 0

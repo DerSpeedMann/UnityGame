@@ -80,14 +80,13 @@ public class LevelManager : MonoBehaviour
 
             var playerManager = player.GetComponent<PlayerManager>();
             playerManager.SetLevelManager(this);
-            playerManager.SetUIManager(uiManager);
             playerManager.SetSpawn(startPoint);
 
             camManager.SetPlayer(player);
         }
     }
 
-    //Checkpoint / win logic
+    //Checkpoint / win- lose logic
     public void GotCheckpoint()
     {
         checkpointCounter += 1;
@@ -99,7 +98,7 @@ public class LevelManager : MonoBehaviour
 
         if (checkpointCounter >= checkpoints.Length)
         {
-            uiManager.EnableWin(true);
+            uiManager.SetActiveHud("WinHud");
 
             if (LevelSelect.unlockedIndex < 2)
             {
@@ -109,5 +108,8 @@ public class LevelManager : MonoBehaviour
         }
         return false;
     }
-
+    public void Lost()
+    {
+        uiManager.SetActiveHud("LoseHud");
+    }
 }
