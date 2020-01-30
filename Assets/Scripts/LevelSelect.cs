@@ -21,6 +21,14 @@ public class LevelSelect : MonoBehaviour
         }
     }
 
+    public static void UnlockLevel(int levelNumber)
+    {
+        if (LevelSelect.unlockedIndex < levelNumber)
+        {
+            LevelSelect.unlockedIndex = levelNumber;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
