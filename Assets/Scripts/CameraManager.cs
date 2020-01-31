@@ -73,15 +73,27 @@ public class CameraManager : MonoBehaviour
 
         UpdateEditorPosition(cameraOrigin - move);
     }
-    public void Zoom(float axis)
+    public void Zoom(float axis, Vector3 zoomCenter)
     {
         if (axis != 0)
         {
+            //Resize Camera
             var size = Camera.main.orthographicSize;
             size -= axis * sensitivity;
             size = Mathf.Clamp(size, minSize, maxSize);
 
             Camera.main.orthographicSize = editorSize = size;
+
+            //Move Camera
+
+            // get touch center in screen cords convert to world cords
+            // zoom
+            // get new world cords for screen cords
+            // calculate difference / adjust
+
+            //transform.position = Vector3.MoveTowards(transform.position, zoomCenter, change);
+
+            //Calculate Zoom Percentage
             zoomPercentage = (size - minSize) / (maxSize - minSize);
         }
     }

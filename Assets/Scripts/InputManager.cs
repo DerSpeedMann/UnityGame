@@ -89,9 +89,15 @@ public class InputManager : MonoBehaviour
                         
                         if (Mathf.Abs(pinchChange) > pinchDelta)
                         {
+                            // calculate center of touch
+                            var touch1 = finger1.position;
+                            var touch2 = finger2.position;
+                            Vector3 center = Vector3.Lerp(touch1, touch2, 0.5f);
+
+                            // pinch zoom logic
                             var pinchMulti = camManager.zoomPercentage * (pinchMultiMax - pinchMultiMin) + pinchMultiMin;
 
-                            Zoom(pinchChange * pinchMulti);
+                            Zoom(pinchChange * pinchMulti, center);
                             startPinchDist = actualPinchDist;
                         }
                         else if(Mathf.Abs(pinchChange) < dragDelta)
@@ -111,8 +117,8 @@ public class InputManager : MonoBehaviour
                 {
                     Drag(Input.mousePosition);
                 }
-
-                Zoom(Input.GetAxis("Mouse ScrollWheel"));
+                var center = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Zoom(Input.GetAxis("Mouse ScrollWheel"), center);
             }
         }
     }
@@ -136,8 +142,8 @@ public class InputManager : MonoBehaviour
     {
         camManager.Drag(nextPoint);
     }
-    public void Zoom(float zoomValue)
+    public void Zoom(float zoomValue, Vector3 center)
     {
-        camManager.Zoom(zoomValue);
+        camManager.Zoom(zoomValue, center);
     }
 }

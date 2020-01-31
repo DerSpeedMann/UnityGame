@@ -103,6 +103,7 @@ public class LevelManager : MonoBehaviour
 
             return true;
         }
+        Lost();
         return false;
     }
     public void Lost()

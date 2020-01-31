@@ -50,10 +50,12 @@ public class UIManager : MonoBehaviour
     }
     public void RestartPressed()
     {
+        SetActiveHud("GameHud");
         levelManager.RestartGame();
     }
     public void RespawnPressed()
     {
+        SetActiveHud("GameHud");
         levelManager.SpawnPlayer();
     }
 
