@@ -55,7 +55,7 @@ MonoBehaviour:
   powerups: []
   spawnOffset: {x: 0, y: 1.5, z: 0}
   editorMode: 1
-  levelNumber: 0
+  levelNumber: 1
 --- !u!1001 &3061376065047120405
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131,26 +131,6 @@ PrefabInstance:
     - target: {fileID: 5985924193260223277, guid: c32b610be6412f94587c7e8f2a7c370a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5555560969676565066, guid: c32b610be6412f94587c7e8f2a7c370a,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5555560968931627205, guid: c32b610be6412f94587c7e8f2a7c370a,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7347986534249537849, guid: c32b610be6412f94587c7e8f2a7c370a,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 505213211651930593, guid: c32b610be6412f94587c7e8f2a7c370a,
-        type: 3}
-      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -240,6 +220,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6193532226603705900, guid: 364655703f8bb66418c62d480b2829fb,
+        type: 3}
+      propertyPath: camManager
+      value: 
+      objectReference: {fileID: 6773624246486748410}
+    - target: {fileID: 6193532226603705900, guid: 364655703f8bb66418c62d480b2829fb,
+        type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 4492767821908220926}
     - target: {fileID: 6193532226603705901, guid: 364655703f8bb66418c62d480b2829fb,
         type: 3}
       propertyPath: camManager

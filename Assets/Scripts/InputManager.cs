@@ -11,12 +11,14 @@ public class InputManager : MonoBehaviour
 
     public bool touchControl = true;
 
-    public float pinchDelta;
+    public bool moveEnabled;
+
     public float pinchMultiMin; //min drag increase while pinching (zoomed all the way in)
     public float pinchMultiMax; //max drag increase while pinching (zoomed all the way out)
-    public float dragDelta;
+    public float dragDelay; // time before drag can be used after zooming (in seconds)
 
     private float startPinchDist;
+    private float timeTillLastZoom = 0;
 
 
     // Start is called before the first frame update
@@ -37,7 +39,7 @@ public class InputManager : MonoBehaviour
         {
             if (touchControl)
             {
-                if (Input.touchCount == 1)
+                if (Input.touchCount == 1 && !moveEnabled)
                 {
                     var touch = Input.GetTouch(0);
 
@@ -71,6 +73,8 @@ public class InputManager : MonoBehaviour
         {
             if (touchControl)
             {
+                timeTillLastZoom += Time.deltaTime;
+
                 if (Input.touchCount == 2)
                 {
                     var finger1 = Input.GetTouch(0);
@@ -87,24 +91,30 @@ public class InputManager : MonoBehaviour
                         var actualPinchDist = Vector2.Distance(finger1.position, finger2.position);
                         var pinchChange = actualPinchDist - startPinchDist;
                         
-                        if (Mathf.Abs(pinchChange) > pinchDelta)
-                        {
-                            // calculate center of touch
-                            var touch1 = finger1.position;
-                            var touch2 = finger2.position;
-                            Vector3 center = Vector3.Lerp(touch1, touch2, 0.5f);
+                        // calculate center of touch
+                        var touch1 = finger1.position;
+                        var touch2 = finger2.position;
+                        Vector3 center = Vector3.Lerp(touch1, touch2, 0.5f);
+                        
+                        // pinch zoom logic
+                        var pinchMulti = camManager.zoomPercentage * (pinchMultiMax - pinchMultiMin) + pinchMultiMin;
 
-                            // pinch zoom logic
-                            var pinchMulti = camManager.zoomPercentage * (pinchMultiMax - pinchMultiMin) + pinchMultiMin;
+                        Zoom(pinchChange * pinchMulti, center);
+                        startPinchDist = actualPinchDist;
 
-                            Zoom(pinchChange * pinchMulti, center);
-                            startPinchDist = actualPinchDist;
-                        }
-                        else if(Mathf.Abs(pinchChange) < dragDelta)
-                        {
-                            Drag(finger2.position);
-                        }
+                        timeTillLastZoom = 0;
                     }
+                }
+                else if (Input.touchCount == 1 && moveEnabled && timeTillLastZoom > dragDelay)
+                {
+                    var touch = Input.GetTouch(0);
+
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        StartDrag(touch.position);
+                    }
+
+                    Drag(touch.position);
                 }
             }
             else
@@ -117,7 +127,7 @@ public class InputManager : MonoBehaviour
                 {
                     Drag(Input.mousePosition);
                 }
-                var center = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                var center = Input.mousePosition;
                 Zoom(Input.GetAxis("Mouse ScrollWheel"), center);
             }
         }

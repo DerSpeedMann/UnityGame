@@ -63,10 +63,10 @@ MonoBehaviour:
   camManager: {fileID: 0}
   levelManager: {fileID: 0}
   touchControl: 1
-  pinchDelta: 8
+  moveEnabled: 0
   pinchMultiMin: 0.01
   pinchMultiMax: 0.025
-  dragDelta: 8
+  dragDelay: 0.2
 --- !u!114 &6193532226603705900
 MonoBehaviour:
   m_ObjectHideFlags: 0

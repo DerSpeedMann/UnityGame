@@ -54,6 +54,7 @@ public class CameraManager : MonoBehaviour
     }
     public void Drag(Vector3 actual, float heightMulti = 2, float widthMulti = 0.9f)
     {
+        Debug.Log("Drag");
         float xDrag, yDrag;
 
         if (Screen.width < Screen.height)
@@ -77,21 +78,21 @@ public class CameraManager : MonoBehaviour
     {
         if (axis != 0)
         {
-            //Resize Camera
+            var camPosition = transform.position;
+            var oldCenter = Camera.main.ScreenToWorldPoint(zoomCenter);
             var size = Camera.main.orthographicSize;
+    
+            //Resize Camera
             size -= axis * sensitivity;
             size = Mathf.Clamp(size, minSize, maxSize);
 
             Camera.main.orthographicSize = editorSize = size;
 
             //Move Camera
-
-            // get touch center in screen cords convert to world cords
-            // zoom
-            // get new world cords for screen cords
-            // calculate difference / adjust
-
-            //transform.position = Vector3.MoveTowards(transform.position, zoomCenter, change);
+            var newCenter = Camera.main.ScreenToWorldPoint(zoomCenter);
+            var camDiff = (oldCenter - camPosition) - (newCenter - camPosition);
+            
+            UpdateEditorPosition(camPosition + camDiff);
 
             //Calculate Zoom Percentage
             zoomPercentage = (size - minSize) / (maxSize - minSize);
