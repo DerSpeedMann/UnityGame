@@ -166,7 +166,6 @@ public class DrawManager : MonoBehaviour
                     
                     if (FasterLineSegmentIntersection(prevPoint, point, p1, p2))
                     {
-                        //Debug.Log("IntersectsNoDraw: " + p1 + " " + p2 + " | " + prevPoint + " " + point);
                         return true;
                     }
                     prevPoint = point;
