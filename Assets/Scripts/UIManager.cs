@@ -11,12 +11,16 @@ public class UIManager : MonoBehaviour
     public Canvas[] availableHUDs;
     public Button[] availableTools;
 
+    public Button drawBtn, moveBtn;
+
     public LevelManager levelManager;
     public DrawManager drawManager;
     public ToolManager toolManager;
 
     private Canvas activeHud;
     private Button activeTool;
+
+    public Sprite draw, erase, move;
 
     void Start()
     {
@@ -70,6 +74,8 @@ public class UIManager : MonoBehaviour
             {
                 if (activeTool != null)
                 {
+                    drawBtn.image.color = Color.gray;
+                    moveBtn.image.color = Color.gray;
                 }
 
                 activeTool = tool;
@@ -84,6 +90,16 @@ public class UIManager : MonoBehaviour
                     case "Erase":
                         toolManager.activeTool = ToolManager.tools.Erase;
                         break;
+                }
+                
+                if(toolManager.activeTool == ToolManager.tools.Draw)
+                {
+                    drawBtn.image.color = Color.white;
+                    moveBtn.image.color = Color.gray;
+                } else if (toolManager.activeTool == ToolManager.tools.Move)
+                {
+                    drawBtn.image.color = Color.gray;
+                    moveBtn.image.color = Color.white;
                 }
             }
         }
