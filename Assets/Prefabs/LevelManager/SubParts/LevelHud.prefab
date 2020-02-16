@@ -684,8 +684,10 @@ MonoBehaviour:
   - {fileID: 5555560968931627206}
   - {fileID: 1598293180208446563}
   - {fileID: 7579137701091529627}
+  availableTools: []
   levelManager: {fileID: 0}
   drawManager: {fileID: 0}
+  toolManager: {fileID: 0}
 --- !u!1 &4706065004489671722
 GameObject:
   m_ObjectHideFlags: 0

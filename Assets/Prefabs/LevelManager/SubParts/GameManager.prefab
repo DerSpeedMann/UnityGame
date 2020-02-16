@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6193532226603705898}
   - component: {fileID: 6193532226603705901}
   - component: {fileID: 6193532226603705900}
+  - component: {fileID: 6451672473735525697}
   m_Layer: 1
   m_Name: GameManager
   m_TagString: Untagged
@@ -62,8 +63,8 @@ MonoBehaviour:
   drawManager: {fileID: 6193532226603705898}
   camManager: {fileID: 0}
   levelManager: {fileID: 0}
+  toolManager: {fileID: 0}
   touchControl: 1
-  moveEnabled: 0
   pinchMultiMin: 0.01
   pinchMultiMax: 0.025
   dragDelay: 0.2
@@ -89,3 +90,16 @@ MonoBehaviour:
   spawnOffset: {x: 0, y: 1.5, z: 0}
   editorMode: 1
   levelNumber: 0
+--- !u!114 &6451672473735525697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6193532226603705905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6e250ab1cce72439e11488818a610a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeTool: 0

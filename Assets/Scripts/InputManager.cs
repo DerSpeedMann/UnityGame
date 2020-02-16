@@ -8,14 +8,15 @@ public class InputManager : MonoBehaviour
     public DrawManager drawManager;
     public CameraManager camManager;
     public LevelManager levelManager;
+    public ToolManager toolManager;
 
     public bool touchControl = true;
 
-    public bool moveEnabled;
 
-    public float pinchMultiMin; //min drag increase while pinching (zoomed all the way in)
-    public float pinchMultiMax; //max drag increase while pinching (zoomed all the way out)
-    public float dragDelay; // time before drag can be used after zooming (in seconds)
+
+    public float pinchMultiMin; //min zoom increase while pinching (zoomed all the way in)
+    public float pinchMultiMax; //max zoom increase while pinching (zoomed all the way out)
+    public float dragDelay; //time before drag can be used after zooming (in seconds)
 
     private float startPinchDist;
     private float timeTillLastZoom = 0;
@@ -24,13 +25,12 @@ public class InputManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(Application.platform);
+
         if (Application.platform != RuntimePlatform.WindowsEditor)
         {
             touchControl = true;
         }
 
-        Debug.Log("touch: " + touchControl);
     }
 
     private void Update()
@@ -39,7 +39,7 @@ public class InputManager : MonoBehaviour
         {
             if (touchControl)
             {
-                if (Input.touchCount == 1 && !moveEnabled)
+                if (Input.touchCount == 1 && toolManager.activeTool == ToolManager.tools.Draw)
                 {
                     var touch = Input.GetTouch(0);
 
@@ -105,7 +105,7 @@ public class InputManager : MonoBehaviour
                         timeTillLastZoom = 0;
                     }
                 }
-                else if (Input.touchCount == 1 && moveEnabled && timeTillLastZoom > dragDelay)
+                else if (Input.touchCount == 1 && toolManager.activeTool == ToolManager.tools.Move && timeTillLastZoom > dragDelay)
                 {
                     var touch = Input.GetTouch(0);
 
