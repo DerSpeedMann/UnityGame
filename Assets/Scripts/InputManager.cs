@@ -39,6 +39,7 @@ public class InputManager : MonoBehaviour
         {
             if (touchControl)
             {
+                // Touch Drawing
                 if (Input.touchCount == 1 && toolManager.activeTool == ToolManager.tools.Draw)
                 {
                     var touch = Input.GetTouch(0);
@@ -54,6 +55,7 @@ public class InputManager : MonoBehaviour
                     }
                 }
             }
+            // Mouse Control
             else
             {
                 if (Input.GetMouseButton(0))
@@ -80,12 +82,14 @@ public class InputManager : MonoBehaviour
                     var finger1 = Input.GetTouch(0);
                     var finger2 = Input.GetTouch(1);
 
+                    // Touch start Zoom / Drag
                     if (finger2.phase == TouchPhase.Began)
                     {
                         StartDrag(finger2.position);
                         startPinchDist = Vector2.Distance(finger1.position, finger2.position);
                     }
 
+                    // Touch Zoom
                     if (finger1.phase == TouchPhase.Moved || finger2.phase == TouchPhase.Moved)
                     {
                         var actualPinchDist = Vector2.Distance(finger1.position, finger2.position);
@@ -105,6 +109,7 @@ public class InputManager : MonoBehaviour
                         timeTillLastZoom = 0;
                     }
                 }
+                // Touch Drag
                 else if (Input.touchCount == 1 && toolManager.activeTool == ToolManager.tools.Move && timeTillLastZoom > dragDelay)
                 {
                     var touch = Input.GetTouch(0);
@@ -117,6 +122,7 @@ public class InputManager : MonoBehaviour
                     Drag(touch.position);
                 }
             }
+            // Mouse Control
             else
             {
                 if (Input.GetMouseButtonDown(1))

@@ -31,6 +31,7 @@ public class LevelManager : MonoBehaviour
         startPoint = GameObject.FindGameObjectsWithTag("Start")[0].transform.position + spawnOffset;
     }
 
+   // change to gmae mode and spawns player
     public void StartGame()
     {
         editorMode = false;
@@ -40,6 +41,8 @@ public class LevelManager : MonoBehaviour
 
         SpawnPlayer();
     }
+
+    // change to editor mode ,destroys player and reset game
     public void StopGame()
     {
         editorMode = true;
@@ -48,6 +51,7 @@ public class LevelManager : MonoBehaviour
 
         camManager.SetGameMode(false);
     }
+
     public void ResetGame()
     {
         foreach (var checkpoint in checkpoints)
