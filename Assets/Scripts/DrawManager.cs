@@ -8,6 +8,8 @@ public class DrawManager : MonoBehaviour
 
     public GameObject drawPrefab;
 
+    public float minDistance = 1; // the minimal distance between points of a line
+
     private List<GameObject> lines;
     private GameObject activeLine = null;
 
@@ -23,6 +25,8 @@ public class DrawManager : MonoBehaviour
         noDrawZones = GameObject.FindGameObjectsWithTag("NoDraw");
     }
 
+    // checks if the current point is in a no Draw Zone 
+    // returns true if not in no draw zone false otherwise
     private bool CanDrawAt(Vector2 point)
     {
         foreach (var zone in noDrawZones)
@@ -34,16 +38,18 @@ public class DrawManager : MonoBehaviour
         }
         return true;
     }
+
+    // add a line to the line List and increase line counter
     private void AddLine(GameObject line)
     {
         //Debug.Log("AddLine:" + lineCount);
         lines.Add(line);
         lineCount++;
     }
+
+    // remove and destroy last line from line list
     public void RemoveLast()
     {
-        //Debug.Log("RemoveLast:" + (lineCount-1));
-
         if(lineCount > 0)
         {
             lineCount--;
@@ -52,10 +58,9 @@ public class DrawManager : MonoBehaviour
         }
     }
 
+    // removes and destroys all lines from line list
     public void RemoveAll()
     {
-        //Debug.Log("RemovedAll:" + lineCount);
-
         foreach (var line in lines)
         {
             Destroy(line);
@@ -64,7 +69,8 @@ public class DrawManager : MonoBehaviour
         lines.Clear();
     }
 
-
+    // creates new line or adds point to active line 
+    // if point is in a noDrawZone no point is added and stopDrawing is called
     public void Draw(Vector3 startPoint)
     {
         var worldPoint = Camera.main.ScreenToWorldPoint(startPoint);
@@ -83,6 +89,9 @@ public class DrawManager : MonoBehaviour
         }
        
     }
+
+    // creates collider for active line if possible and sets active line to null
+    // if collider cant be created line is destoyed
     public void StopDrawing()
     {
         if (activeLine != null)
@@ -97,6 +106,7 @@ public class DrawManager : MonoBehaviour
         }
     }
 
+    // initializes new active line
     private void CreateNewLine()
     {
         activeLine = Instantiate(drawPrefab, new Vector3(0, 0, 0), Quaternion.identity);
@@ -104,14 +114,14 @@ public class DrawManager : MonoBehaviour
         lineRenderer.positionCount = 0;
     }
 
+    // add point to given line if distance between last and new point > minDistance or line has no points
     private void AddPoint(GameObject line, Vector3 newPoint)
     {
         var distance = Vector2.Distance(newPoint, lastPoint);
         var lineRenderer = line.GetComponent<LineRenderer>();
 
-        if ( distance > 1 || lineRenderer.positionCount <= 0)
+        if ( distance > minDistance || lineRenderer.positionCount <= 0)
         {
-            //Debug.Log("Draw: distance last to new Point " + distance);
 
             if(lineRenderer.positionCount > 0 && IntersectsNoDraw(lastPoint, newPoint))
             {
@@ -124,6 +134,9 @@ public class DrawManager : MonoBehaviour
             lastPoint = newPoint;
         }
     }
+
+    // creates collider for the given line
+    // returnes true if line has more than 1 point false otherwise
     private bool CreateCollider(GameObject line)
     {
         var lineRenderer = line.GetComponent<LineRenderer>();
@@ -141,6 +154,9 @@ public class DrawManager : MonoBehaviour
         }
         return false;
     }
+
+    // calculates if a line (point1 to point2) is intersecting with any noDrawZones in the level
+    // returnes true if line is intersecting false otherwise
     private bool IntersectsNoDraw(Vector2 p1, Vector2 p2)
     {
         foreach(var zone in noDrawZones)
@@ -175,6 +191,7 @@ public class DrawManager : MonoBehaviour
         return false;
     }
 
+    // calculates line intersection
     static bool FasterLineSegmentIntersection(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4)
     {
 
@@ -223,6 +240,7 @@ public class DrawManager : MonoBehaviour
         return doIntersect;
     }
 
+    // Creates 2DPolygon collider from Mesh
     private void SetPolygonCollider2DFromMesh(PolygonCollider2D polygonCollider, Mesh mesh)
     {
 

@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawPrefab: {fileID: 1880421946707771895, guid: 18c8a7745535e16428b9b1e042eb16fd,
     type: 3}
+  minDistance: 1
 --- !u!114 &6193532226603705901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +64,7 @@ MonoBehaviour:
   drawManager: {fileID: 6193532226603705898}
   camManager: {fileID: 0}
   levelManager: {fileID: 0}
-  toolManager: {fileID: 0}
+  toolManager: {fileID: 6451672473735525697}
   touchControl: 1
   pinchMultiMin: 0.01
   pinchMultiMax: 0.025

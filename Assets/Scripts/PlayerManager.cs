@@ -22,14 +22,19 @@ public class PlayerManager : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         defaultGravityScale = rigidBody.gravityScale;
     }
+
+    
     private void FixedUpdate()
     {
+        // boosts player if speedboost is enabled
         if (boostEnabled)
         {
             var currentMovementVector = transform.right * speedBoost;
             rigidBody.AddForce(currentMovementVector);
         }
     }
+
+    // collision detection
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (alive && !won)
@@ -67,7 +72,7 @@ public class PlayerManager : MonoBehaviour
         spawnPoint = point;
     }
 
-    //Spawn and Respawn logic
+    // Reset player and stop sleth
     public void ResetPlayer()
     {
         SetAlive(true);
@@ -78,16 +83,22 @@ public class PlayerManager : MonoBehaviour
 
         StopSleth();
     }
+
+    // respawns player
     public void Respawn()
     {
         ResetPlayer();
         transform.SetPositionAndRotation(spawnPoint, Quaternion.identity);
     }
+
+    // stops sleth
     public void StopSleth()
     {
         rigidBody.velocity = Vector2.zero;
         rigidBody.angularVelocity = 0;
     }
+
+    // changes alive status of player and calls lost function of levelManager
     public void SetAlive(bool alive)
     {
         if (this.alive != alive && alive == false)
@@ -96,7 +107,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    //Powerups
+    // activates given powerup
     private void GotPowerup(GameObject powerupObject)
     {
         powerupObject.SetActive(false);

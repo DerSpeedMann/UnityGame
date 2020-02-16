@@ -52,6 +52,7 @@ public class LevelManager : MonoBehaviour
         camManager.SetGameMode(false);
     }
 
+    // resets checkpoints, respawns powerups and stops player
     public void ResetGame()
     {
         foreach (var checkpoint in checkpoints)
@@ -67,11 +68,15 @@ public class LevelManager : MonoBehaviour
         player.GetComponent<PlayerManager>().SetSpawn(startPoint);
         player.GetComponent<PlayerManager>().ResetPlayer();
     }
+
+    // reset game and respawn player
     public void RestartGame()
     {
         ResetGame();
         SpawnPlayer();
     }
+
+    // initializes and spawns player / respawns player
     public void SpawnPlayer()
     {
         if (player)
@@ -90,26 +95,34 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    //Checkpoint / win- lose logic
+    //increase checkpoint counter 
     public void GotCheckpoint()
     {
         checkpointCounter += 1;
         Debug.Log("checkpoints reached:" + checkpoints);
     }
+
+    // check win conditions and calls win / lose 
     public bool WinCheck()
     {
         Debug.Log("max:" + checkpoints.Length + " got:" + checkpointCounter);
 
         if (checkpointCounter >= checkpoints.Length)
         {
-            uiManager.SetActiveHud("WinHud");
-            LevelSelect.UnlockLevel(levelNumber);
-
+            Win();
             return true;
         }
         Lost();
         return false;
     }
+
+    // show win screen
+    public void Win()
+    {
+        uiManager.SetActiveHud("WinHud");
+        LevelSelect.UnlockLevel(levelNumber);
+    }
+    // show lose screen
     public void Lost()
     {
         uiManager.SetActiveHud("LoseHud");
