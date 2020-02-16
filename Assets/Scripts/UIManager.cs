@@ -70,7 +70,6 @@ public class UIManager : MonoBehaviour
             {
                 if (activeTool != null)
                 {
-                    //TODO: change Button appearance
                 }
 
                 activeTool = tool;
@@ -86,8 +85,6 @@ public class UIManager : MonoBehaviour
                         toolManager.activeTool = ToolManager.tools.Erase;
                         break;
                 }
-                
-                //TODO: change Button appearance
             }
         }
     }
