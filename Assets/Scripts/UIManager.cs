@@ -62,7 +62,7 @@ public class UIManager : MonoBehaviour
         SetActiveHud("GameHud");
         levelManager.SpawnPlayer();
     }
-    public bool SetActiveTool(string name)
+    public void SetActiveTool(string name)
     {
         foreach (Button tool in availableTools)
         {
@@ -70,7 +70,6 @@ public class UIManager : MonoBehaviour
             {
                 if (activeTool != null)
                 {
-                    //TODO: change Button appearance
                 }
 
                 activeTool = tool;
@@ -86,12 +85,8 @@ public class UIManager : MonoBehaviour
                         toolManager.activeTool = ToolManager.tools.Erase;
                         break;
                 }
-                
-                //TODO: change Button appearance
-                return true;
             }
         }
-        return false;
     }
     public bool SetActiveHud(string name)
     {
