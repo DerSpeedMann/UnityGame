@@ -258,6 +258,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c9d15c735f7842ec89a95a1931e048a, type: 3}
+--- !u!114 &1128729736 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4486697883820595213, guid: f5114631dfb0e074987067d7c559a5cc,
+    type: 3}
+  m_PrefabInstance: {fileID: 7450466763067016866}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1452094983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -475,6 +487,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 813398cfa7bbca64a985ec9b084d152c, type: 3}
+--- !u!114 &2089723500 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7507218622427959033, guid: f5114631dfb0e074987067d7c559a5cc,
+    type: 3}
+  m_PrefabInstance: {fileID: 7450466763067016866}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &109363338178387209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -753,14 +777,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4492767821908220926, guid: f5114631dfb0e074987067d7c559a5cc,
         type: 3}
-      propertyPath: availableHUDs.Array.size
-      value: 4
+      propertyPath: availableToolButtons.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4492767821908220926, guid: f5114631dfb0e074987067d7c559a5cc,
         type: 3}
-      propertyPath: toolManager
+      propertyPath: availableToolButtons.Array.data[0]
       value: 
-      objectReference: {fileID: 7450466763067016867}
+      objectReference: {fileID: 2089723500}
+    - target: {fileID: 4492767821908220926, guid: f5114631dfb0e074987067d7c559a5cc,
+        type: 3}
+      propertyPath: availableToolButtons.Array.data[1]
+      value: 
+      objectReference: {fileID: 1128729736}
     - target: {fileID: 7450466762945305296, guid: f5114631dfb0e074987067d7c559a5cc,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -781,32 +810,5 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7450466762431601553, guid: f5114631dfb0e074987067d7c559a5cc,
-        type: 3}
-      propertyPath: toolManager
-      value: 
-      objectReference: {fileID: 7450466763067016867}
-    - target: {fileID: 3061376066338765533, guid: f5114631dfb0e074987067d7c559a5cc,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToLevelSelection
-      objectReference: {fileID: 0}
-    - target: {fileID: 3061376066338765533, guid: f5114631dfb0e074987067d7c559a5cc,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5114631dfb0e074987067d7c559a5cc, type: 3}
---- !u!114 &7450466763067016867 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7718687469404227837, guid: f5114631dfb0e074987067d7c559a5cc,
-    type: 3}
-  m_PrefabInstance: {fileID: 7450466763067016866}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec6e250ab1cce72439e11488818a610a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

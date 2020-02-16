@@ -19,8 +19,8 @@ public class InputManager : MonoBehaviour
     public float dragDelay; //time before drag can be used after zooming (in seconds)
 
     private float startPinchDist;
-    private float timeTillLastZoom = 0;
-
+    private float noDragTimer = 0;
+    private bool drawEnabled;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +30,7 @@ public class InputManager : MonoBehaviour
         {
             touchControl = true;
         }
-
+        drawEnabled = toolManager.activeTool == ToolManager.tools.Draw;
     }
 
     private void Update()
@@ -42,6 +42,8 @@ public class InputManager : MonoBehaviour
                 // Touch Drawing
                 if (Input.touchCount == 1 && toolManager.activeTool == ToolManager.tools.Draw)
                 {
+                    drawEnabled = true;
+
                     var touch = Input.GetTouch(0);
 
                     if (touch.phase == TouchPhase.Moved)
@@ -75,7 +77,7 @@ public class InputManager : MonoBehaviour
         {
             if (touchControl)
             {
-                timeTillLastZoom += Time.deltaTime;
+                noDragTimer += Time.deltaTime;
 
                 if (Input.touchCount == 2)
                 {
@@ -106,12 +108,19 @@ public class InputManager : MonoBehaviour
                         Zoom(pinchChange * pinchMulti, center);
                         startPinchDist = actualPinchDist;
 
-                        timeTillLastZoom = 0;
+                        noDragTimer = 0;
                     }
                 }
                 // Touch Drag
-                else if (Input.touchCount == 1 && toolManager.activeTool == ToolManager.tools.Move && timeTillLastZoom > dragDelay)
+                else if (Input.touchCount == 1 && toolManager.activeTool == ToolManager.tools.Move && noDragTimer > dragDelay)
                 {
+                    // delays move after changing to avoid instant move
+                    if (drawEnabled)
+                    {
+                        drawEnabled = false;
+                        noDragTimer = 0;
+                        return;
+                    }
                     var touch = Input.GetTouch(0);
 
                     if (touch.phase == TouchPhase.Began)

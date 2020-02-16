@@ -9,9 +9,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Canvas[] availableHUDs;
-    public Button[] availableTools;
-
-    public Button drawBtn, moveBtn;
+    public Button[] availableToolButtons;
 
     public LevelManager levelManager;
     public DrawManager drawManager;
@@ -20,8 +18,6 @@ public class UIManager : MonoBehaviour
     private Canvas activeHud;
     private Button activeTool;
 
-    public Sprite draw, erase, move;
-
     void Start()
     {
         foreach (Canvas hud in availableHUDs)
@@ -29,7 +25,7 @@ public class UIManager : MonoBehaviour
             hud.gameObject.SetActive(false);
         }
         SetActiveHud("EditorHud");
-        SetActiveTool("EditorHud");
+        SetActiveTool("Draw");
 
     }
 
@@ -68,17 +64,13 @@ public class UIManager : MonoBehaviour
     }
     public void SetActiveTool(string name)
     {
-        foreach (Button tool in availableTools)
-        {
-            if (tool.name == name)
-            {
-                if (activeTool != null)
-                {
-                    drawBtn.image.color = Color.gray;
-                    moveBtn.image.color = Color.gray;
-                }
+        Debug.Log("length: " + availableToolButtons.Length);
 
-                activeTool = tool;
+        foreach (Button toolButton in availableToolButtons)
+        {
+            Debug.Log("tools: " + toolButton.name);
+            if (toolButton.name == name)
+            {
                 switch (name)
                 {
                     case "Draw":
@@ -90,17 +82,19 @@ public class UIManager : MonoBehaviour
                     case "Erase":
                         toolManager.activeTool = ToolManager.tools.Erase;
                         break;
+                    default:
+                        return;
                 }
-                
-                if(toolManager.activeTool == ToolManager.tools.Draw)
+
+                // disables old active
+                if (activeTool != null)
                 {
-                    drawBtn.image.color = Color.white;
-                    moveBtn.image.color = Color.gray;
-                } else if (toolManager.activeTool == ToolManager.tools.Move)
-                {
-                    drawBtn.image.color = Color.gray;
-                    moveBtn.image.color = Color.white;
+                    activeTool.image.color = Color.gray;
                 }
+
+                // sets and enables new button
+                activeTool = toolButton;
+                activeTool.image.color = Color.white;
             }
         }
     }
