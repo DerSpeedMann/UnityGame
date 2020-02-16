@@ -8,24 +8,35 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public Canvas[] availableHUDs;
-    public Button[] availableToolButtons;
-
     public LevelManager levelManager;
     public DrawManager drawManager;
     public ToolManager toolManager;
 
+    public string startHUDName;
+    public string startToolName;
+
+    public Canvas[] availableHUDs;
+    public Button[] availableToolButtons;
+
+    public Color disabledToolColor;
+    public Color enabledToolColor;
+
     private Canvas activeHud;
     private Button activeTool;
 
+    // Disables all HUDs and tool buttons, and reanables selected
     void Start()
     {
         foreach (Canvas hud in availableHUDs)
         {
             hud.gameObject.SetActive(false);
         }
-        SetActiveHud("EditorHud");
-        SetActiveTool("Draw");
+        foreach (Button button in availableToolButtons)
+        {
+            button.image.color = disabledToolColor;
+        }
+        SetActiveHud(startHUDName);
+        SetActiveTool(startToolName);
 
     }
 
@@ -62,13 +73,12 @@ public class UIManager : MonoBehaviour
         SetActiveHud("GameHud");
         levelManager.SpawnPlayer();
     }
+
+    // select tool in Toolmanager and changes apearane of buttons (disabled / enabled)
     public void SetActiveTool(string name)
     {
-        Debug.Log("length: " + availableToolButtons.Length);
-
         foreach (Button toolButton in availableToolButtons)
         {
-            Debug.Log("tools: " + toolButton.name);
             if (toolButton.name == name)
             {
                 switch (name)
@@ -89,15 +99,17 @@ public class UIManager : MonoBehaviour
                 // disables old active
                 if (activeTool != null)
                 {
-                    activeTool.image.color = Color.gray;
+                    activeTool.image.color = disabledToolColor;
                 }
 
                 // sets and enables new button
                 activeTool = toolButton;
-                activeTool.image.color = Color.white;
+                activeTool.image.color = enabledToolColor;
             }
         }
     }
+
+    // unhides selected hud and hides all other
     public bool SetActiveHud(string name)
     {
         foreach (Canvas hud in availableHUDs)
@@ -117,6 +129,7 @@ public class UIManager : MonoBehaviour
         return false;
     }
 
+    // return to level select screen
     public void GoToLevelSelection()
     {
         SceneManager.LoadScene("LevelSelection");

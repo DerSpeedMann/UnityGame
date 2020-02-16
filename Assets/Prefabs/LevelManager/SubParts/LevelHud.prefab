@@ -810,6 +810,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6300ca32d790afc43a91dcdddff6b069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 0}
+  drawManager: {fileID: 0}
+  toolManager: {fileID: 0}
+  startHUDName: EditorHud
+  startToolName: Draw
   availableHUDs:
   - {fileID: 5555560969676565067}
   - {fileID: 5555560968931627206}
@@ -818,9 +823,8 @@ MonoBehaviour:
   availableToolButtons:
   - {fileID: 4779109480098972908}
   - {fileID: 1459098915299906072}
-  levelManager: {fileID: 0}
-  drawManager: {fileID: 0}
-  toolManager: {fileID: 0}
+  disabledToolColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  enabledToolColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &4706065004489671722
 GameObject:
   m_ObjectHideFlags: 0

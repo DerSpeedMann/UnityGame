@@ -123,6 +123,7 @@ public class PlayerManager : MonoBehaviour
                 break;
         }
     }
+    // subroutine for speed boost
     IEnumerator BoostSpeed(float speed, float duration)
     {
         Debug.Log("boost started");
@@ -134,6 +135,8 @@ public class PlayerManager : MonoBehaviour
         boostEnabled = false;
         Debug.Log("boost ended");
     }
+    // subroutine for hover 
+    //drag of 0 lets player hover, > 0 lets player ascend
     IEnumerator Hover(float drag, float duration)
     {
         if(rigidBody.gravityScale == defaultGravityScale)
@@ -154,7 +157,7 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("hover ended");
     }
 
-    //Checkpoint
+    // calls gotCheckpoint from levelManager, sets spawn point to checkpoint and disables checkpoint
     private void GotCkeckpoint(GameObject checkpoint)
     {
         if(spawnPoint != checkpoint.transform.position)

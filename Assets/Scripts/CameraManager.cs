@@ -24,7 +24,7 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         startPoint = GameObject.FindGameObjectsWithTag("Start")[0];
-        UpdateEditorPosition(startPoint.transform.position);
+        MoveCameraTo(startPoint.transform.position);
     }
 
     // LateUpdate is called after Update each frame
@@ -32,9 +32,11 @@ public class CameraManager : MonoBehaviour
     {   
         if(player)
         {
-            UpdateGamePosition(player);
+            MoveCameraTo(player);
         }
     }
+
+    // changes between game mode (camera following player) and editor mode (free moving camera)
     public void SetGameMode(bool gamemode)
     {
         if (gamemode)
@@ -43,18 +45,21 @@ public class CameraManager : MonoBehaviour
         }
         else
         {
-            UpdateEditorPosition(camEditorLoacation);
+            MoveCameraTo(camEditorLoacation);
             Camera.main.orthographicSize = editorSize;
         }
     }
+
+    // set start point for draging
     public void StartDrag(Vector3 origin)
     {
         dragOrigin = origin;
         cameraOrigin = Camera.main.transform.position;
     }
+
+    // drag camera with height and width multiplayer for different screen proportions
     public void Drag(Vector3 actual, float heightMulti = 2, float widthMulti = 0.9f)
     {
-        Debug.Log("Drag");
         float xDrag, yDrag;
 
         if (Screen.width < Screen.height)
@@ -72,8 +77,10 @@ public class CameraManager : MonoBehaviour
         Vector3 pos = Camera.main.ScreenToViewportPoint(actual - dragOrigin);
         Vector3 move = new Vector3(pos.x * xDrag, pos.y * yDrag, 0);
 
-        UpdateEditorPosition(cameraOrigin - move);
+        MoveCameraTo(cameraOrigin - move);
     }
+
+    // zooms to or from selected center
     public void Zoom(float axis, Vector3 zoomCenter)
     {
         if (axis != 0)
@@ -92,13 +99,15 @@ public class CameraManager : MonoBehaviour
             var newCenter = Camera.main.ScreenToWorldPoint(zoomCenter);
             var camDiff = (oldCenter - camPosition) - (newCenter - camPosition);
             
-            UpdateEditorPosition(camPosition + camDiff);
+            MoveCameraTo(camPosition + camDiff);
 
             //Calculate Zoom Percentage
             zoomPercentage = (size - minSize) / (maxSize - minSize);
         }
     }
-    public void UpdateGamePosition(GameObject target)
+
+    // moves camera to target position
+    public void MoveCameraTo(GameObject target)
     {
         transform.position = new Vector3(
             target.transform.position.x, 
@@ -106,7 +115,9 @@ public class CameraManager : MonoBehaviour
             -10
             );
     }
-    public void UpdateEditorPosition(Vector3 position)
+
+    // moves camera to target position
+    public void MoveCameraTo(Vector3 position)
     {
         transform.position = camEditorLoacation = new Vector3(
             position.x,
@@ -114,6 +125,7 @@ public class CameraManager : MonoBehaviour
             -10);
     }
 
+    // set player to follow in game mode
     public void SetPlayer(GameObject player)
     {
         this.player = player;
